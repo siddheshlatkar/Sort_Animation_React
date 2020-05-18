@@ -12,9 +12,18 @@ export function InputArray() {
     const inputArray = useSelector(selectInputArray);
     const dispatch = useDispatch();
     const [number, setNumber] = useState(0);
+    const [colorIndex, setColorIndex] = useState(0);
+
+    const colorArray = ["rgba(0, 0, 255, 0.5)", "rgba(0, 255, 0, 0.5)", "rgba(255, 0, 0, 0.5)"];
 
     const handleAdd = () => {
-        dispatch(add(number));
+        const color = colorArray[colorIndex];
+        if (colorIndex != 2) {
+            setColorIndex(colorIndex + 1);
+        } else {
+            setColorIndex(0);
+        }
+        dispatch(add({number, color}));
         setNumber(0);
     };
 
@@ -28,7 +37,7 @@ export function InputArray() {
             <Grid container justify="center" spacing={2}>
                 {inputArray.map((value, i) => (
                     <Grid key={i} item>
-                        <Paper className={styles.paper} elevation={3}>{value}</Paper>
+                        <Paper className={styles.paper} elevation={3} style={{backgroundColor: value.color}}>{value.number}</Paper>
                     </Grid>
                 ))}
                 <Grid container className={styles.input} justify="center" spacing={2} style={{marginTop: 10}}>
