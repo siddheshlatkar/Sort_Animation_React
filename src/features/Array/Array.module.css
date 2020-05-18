@@ -1,0 +1,10 @@
+.itm{
+    width: 70px;
+    position: relative;
+}
+
+.itmtext {
+    position: absolute;
+    bottom: 10px;
+    margin-left: 20px;
+}
